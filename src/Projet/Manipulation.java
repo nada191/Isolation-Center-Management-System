@@ -39,6 +39,7 @@ public class Manipulation {
 					j++ ;
 				
 			}
+			lecture.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Fichier non trouvé") ;
 			System.exit(-1);
@@ -48,13 +49,12 @@ public class Manipulation {
 		}
 
 	}
-	public void afficher()
+	public void afficher(long ref)
 	{
 		for (Gouvernorat value : pays)
 		{
 			
-			value.afficher_gouvernorat() ;
-		}
+			value.afficher_departs(ref);		}
 	}
 	public void afficher_centres(String g)
 	{
@@ -123,7 +123,7 @@ public class Manipulation {
 		{
 			if((value.get_nom_gouv()).equalsIgnoreCase(gouv))
 			{
-				System.out.println(value.personnes_contamines());
+				value.personnes_contamines();
 
 			}
 		}
@@ -133,9 +133,8 @@ public class Manipulation {
 		float b =0;
 		for (Gouvernorat value : pays)
 		{
-			b =value.personne_contaminees(ref);
+			value.personne_contaminees(ref);
 		}
-		System.out.println(b);
 	}
 	public Vector<Gouvernorat> plus_proche(String g)
 	{
@@ -219,6 +218,7 @@ return(trie);
 				if (b)
 					break ;
 			}
+		System.out.println("total des affectations possibles "+(a-nb));
 		System.out.println("confirmer l'ajout : oui/non");
 		String rep = cl.next();
 		if(rep.equalsIgnoreCase("oui"))
@@ -227,7 +227,7 @@ return(trie);
 			for (Gouvernorat value : V)
 			{
 					try {
-						while(a>j)
+						while((a-nb)>j)
 						{
 						System.out.println("nom "+j);
 						String nom = cl.next();

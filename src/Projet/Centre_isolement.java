@@ -43,9 +43,10 @@ public class Centre_isolement {
 				    Personne_concernee p = new Personne_concernee(nom,prenom,num,etat,cal);
 					ajouter_personne(p) ;	
 				}
-			}	
+			}
+			lecture.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("Fichier non trouvÃ©") ;
+			System.out.println("Fichier non trouvé") ;
 			System.exit(-1);
 		} catch (IOException e) {
 			System.out.println("Lecture impossible") ;
@@ -68,8 +69,8 @@ public class Centre_isolement {
 	}
 	public void afficher_centre()
 	{
-		System.out.println("rÃ©ference"+"\t\t"+"Adresse"+"\t\t\t"+"Gouvernorat"+"\t\t"+"chambres"+"\t\t"+"chambres_occupÃ©s");
-		System.out.println(num_ref+"\t\t\t"+Adresse+"\t\t\t\t"+gouv_appartenance+"\t\t"+max+"\t\t\t"+nb_actuel);
+		System.out.println("réference"+"\t\t"+"Adresse"+"\t\t\t"+"Gouvernorat"+"\t\t"+"chambres"+"\t\t"+"chambres_occupées");
+		System.out.println(num_ref+"\t\t\t"+Adresse+"\t\t\t"+gouv_appartenance+"\t\t"+max+"\t\t\t"+nb_actuel);
 		
 	}
 	public void afficher_personnes()
@@ -134,13 +135,15 @@ public class Centre_isolement {
 	}
 	public void afficher_departs()
 	{
-		{
+			int i=0 ;
 			for (Personne_concernee value : personnes)
 			{
 				if((value.getEtat_sante()==0 & value.fin_confinement()))
-					value.afficher_personne();
+					{i++;
+					value.afficher_personne();}
 			}
-		}
+			if(i==0)
+				System.out.println("pas de depart programmé pour aujourd'hui");
 	}
 	public void hospitalisees()
 	{

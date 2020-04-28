@@ -2,8 +2,11 @@ saad	rtre	14523698	Mednine	2	9-04-2020	100
 saadgd	rtreh	14789632	Mednine	1	9-04-2020	100
 meher	bensalah	14796325	Tunis	2	18-4-2019	879
 saadi	ahmed	14529856	Manouba	1	20-02-2019	503
-mourad	gharbi	14587965	Manouba	0	09-04-2020	503
+mourad	gharbi	14587965	Manouba	1	09-04-2020	503
+mourad	kgjj	78965478	Manouba	1	09-04-2020	547
+mourad	kgjkj	78965478	Manouba	0	09-04-2020	547
 mourad	gharbi	14587875	Mednine	1	17-03-2019	8
 amir	ben	66656565	Gabes	1	15-03-2020	500
 mourad	gharbi	14587875	Tunis	1	17-03-2019	154
 mourad	ghart	14587875	Tunis	1	17-03-2019	154
+aport	fgght	14896575	Mednine	0	14-04-2020	100

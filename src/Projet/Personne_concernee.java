@@ -32,7 +32,7 @@ import java.util.Date;
 	        etat_sante = val;
 	    }
 	    public int getEtat_sante() {
-	    	return etat_sante; /* (en bonne santÃ©(0) || malade (situation grave (corona)(1) || situation normale (corona)(2) || autre maladie(3)) */
+	    	return etat_sante; /* (en bonne santé(0) || malade (situation grave (corona)(1) || situation normale (corona)(2)) */
 	    }
 	    public void setDate_depart(Calendar d){
 	    	date_depart = d;
@@ -57,9 +57,9 @@ import java.util.Date;
 	    	d.add(Calendar.DATE,14);
 	    	int moisd = d.get(Calendar.MONTH) ; 
 	    	int jourd = d.get(Calendar.DATE) ;
-	    	int anneed = d.get(Calendar.YEAR);	
+	    	int anneed = d.get(Calendar.YEAR);
 	    	d.add(Calendar.DATE,-14);
-	    	return (mois==moisd && jour==jourd && annee==anneed);
+	    	return (mois==(moisd+1) & jour==jourd & annee==anneed);
 	    	
 	    }
 	    public void afficher_personne()
@@ -67,7 +67,7 @@ import java.util.Date;
 	    	int m = date_arrivee.get(Calendar.MONTH) ; 
 	    	int j = date_arrivee.get(Calendar.DATE) ;
 	    	int a = date_arrivee.get(Calendar.YEAR);
-	    	System.out.println("Nom : "+nom+" Prenom : "+prenom+" NÂ°cin : "+num_cin+" Etat de santÃ© :"+etat_sante+" Date d'arrivÃ© : "+ j+"/"+m+"/"+a) ;
+	    	System.out.println("Nom : "+nom+" Prenom : "+prenom+" N°cin : "+num_cin+" Etat de santé :"+etat_sante+" Date d'arrivée : "+ j+"/"+m+"/"+a) ;
 	    }
 	    
 

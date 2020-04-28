@@ -34,9 +34,10 @@ public class Gouvernorat {
 					    Centre_isolement c = new Centre_isolement(ref,ad,gov,max);
 						ajouter_centre(c) ;
 					}
-				}	
+				}
+				lecture.close();
 			} catch (FileNotFoundException e) {
-				System.out.println("Fichier non trouvÃ©") ;
+				System.out.println("Fichier non trouvé") ;
 				System.exit(-1);
 			} catch (IOException e) {
 				System.out.println("Lecture impossible") ;
@@ -71,12 +72,10 @@ public class Gouvernorat {
 	    {
 	        float s = 0;
 	        float q = 0;
-	        for(int i = 0;i <nb_c; i++)
+	        for(Centre_isolement value : centres)
 	        {
-	        	s =s+ (centres.elementAt(i)).get_ac() ;
-		           System.out.println(s);
-	            q =q+ (centres.elementAt(i)).get_malades();
-		           System.out.println(q);
+	        	s =s+ (value.get_ac()) ;
+	            q =q+ (value.get_malades());
 
 	        }
 	        System.out.println(((float)(q/s))*100);
@@ -89,7 +88,8 @@ public class Gouvernorat {
 			{
 				
 				if(value.get_ref()==ref)
-			    	a=(float)value.get_malades()/(float)value.get_ac()*100 ;
+			    	{a=(((float)value.get_malades())/((float)value.get_ac()))*100 ;
+				System.out.println(a);}
 			}
 			return (a);
 	    }
