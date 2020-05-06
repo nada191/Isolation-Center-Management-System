@@ -1,4 +1,4 @@
-tunis	manouba	Gabes	sfax	Mednine	Bizerte	Nabeul	tataouin	kairouan	monastir
+tunis	manouba	Gabes	sfax	Mednine	Bizerte	Nabeul	tataouine	kairouan	monastir
 0	10	409	273	489	69	70	536	164	172
 10	0	415	280	495	68	76.58	542.2	169	177.5
 409	415	0	142.9	77.5	442.7	331	124	213.7	275.7

@@ -1,0 +1,10 @@
+Maksoud	Anwer	4465464	gériatrie	manouba
+kacem	Nihel	4654654	urgence	manouba
+Mhamdi	Salah	21458796	pneumologie	Gabes
+Gebsi	Amira	2565465	pédiatrie	Tunis
+Amin	Salah	24796325	réanimation	manouba
+Amina	Hlel	28963547	réanimation	manouba
+Amina	Hlel	28963547	urgence	bizerte
+kacem	Nihel	46546054	gériatrie	Gabes
+Amina	Hlel	28963547	pneumologie	mednine
+Ahmed	Ali	41258963	pédiatrie	Bizerte

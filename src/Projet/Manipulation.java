@@ -4,11 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -41,7 +37,7 @@ public class Manipulation {
 			}
 			lecture.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("Fichier non trouvÃ©") ;
+			System.out.println("Fichier non trouvé") ;
 			System.exit(-1);
 		} catch (IOException e) {
 			System.out.println("Lecture impossible") ;
@@ -49,7 +45,7 @@ public class Manipulation {
 		}
 
 	}
-	public void afficher(long ref)
+	public void afficher(int ref)
 	{
 		for (Gouvernorat value : pays)
 		{
@@ -64,11 +60,12 @@ public class Manipulation {
 			if ((value.get_nom_gouv()).equalsIgnoreCase(g))
 			{
 				value.afficher_centres();
+				break;
 			}
     }
 		
 	}
-	public void afficher_personnes(long ref) // par centre
+	public void afficher_personnes(int ref) // par centre
 	{
 		for (Gouvernorat value : pays)
 		{
@@ -77,63 +74,64 @@ public class Manipulation {
 
 				
 		}
-	 public boolean est_unique(long ref)
-	    {
- 		boolean b = false;
-	    	for (Gouvernorat value : pays)
- 		{
-	    	if(value.est_unique(ref))
-	    		b=true ;
- 		}
-	    	return(b);
-	    }
 	public void ajouter_centre(String g)
 	{Scanner clavier = new Scanner(System.in); 
-		for (Gouvernorat value : pays)
+	int i=1 ;
+	for (Gouvernorat value : pays)
+	{
+		i=i+value.get_nbc();
+	}
+	for (Gouvernorat value : pays)
 		{
-			if((value.get_nom_gouv()).equalsIgnoreCase(g))
-				{
-				System.out.println("reference");
-				long ref;
-				ref = clavier.nextLong();
-				while (est_unique(ref)==true)
-					ref = clavier.nextLong();
-				System.out.println("capacite");
-				int cap = clavier.nextInt();
-				System.out.println("adresse");
-				Scanner cl = new Scanner(System.in); 
-				String ad = cl.nextLine();
-				
-				Centre_isolement c = new Centre_isolement(ref,ad,g,cap);
-				value.ajouter_centre(c);
 			
+			if((value.get_nom_gouv()).equalsIgnoreCase(g))
+				{ boolean b = true;
+				while(b)
+				{
+					try {
+						System.out.print("donnez la capacite du nouveau centre : ");
+						String c1 = clavier.nextLine();
+						int cap = Integer.parseInt(c1);
+						System.out.print("\ndonnez son adresse : ");
+						String ad = clavier.next();
+						Centre_isolement c = new Centre_isolement(i,ad,g,cap);
+						value.ajouter_centre(c);
+					System.out.println("la reference accordee a ce centre est : "+i);
+					b=false;
+					}
+					catch(Exception e)
+					{
+						b=true;
+					}
+				}
+				
+				
 		}
 		}}
-	public void supprimer_personne(int cin , int ref)
+	public void supprimer_personne(long cin , int ref)
 	{
 		for (Gouvernorat value : pays)
 		{
-			
 			value.supprimer(cin,ref);
 		}
 	}
-	public void statistiques_centre(String gouv)
+	public void statistiques_gouv(String gouv)
 	{
 		for (Gouvernorat value : pays)
 		{
 			if((value.get_nom_gouv()).equalsIgnoreCase(gouv))
 			{
 				value.personnes_contamines();
+				break ;
 
 			}
 		}
 	}
-	public void statistiques_gouv(long ref)
+	public void statistiques_centre(int ref)
 	{
-		float b =0;
 		for (Gouvernorat value : pays)
 		{
-			value.personne_contaminees(ref);
+			value.personne_contamines(ref);
 		}
 	}
 	public Vector<Gouvernorat> plus_proche(String g)
@@ -191,22 +189,26 @@ return(trie);
 	}
 	void Demande(int nb , String gouv)
 	{
+		System.out.println("          ********************************  Demande d'affectation  *********************************    \n");
+		System.out.println("                                             Nombre de personnes : "+nb+"\n");
+		System.out.println("                                            Gouvernorat : "+gouv+"\n");
+		System.out.println("          *********************************  Affectation proposée  **********************************    \n");
 		boolean b =false ;
 		int a =nb ;
 		Scanner cl = new Scanner(System.in);
 		Vector<Gouvernorat> V = plus_proche(gouv);
 		for (Gouvernorat value : V) {
-			long[][] mat = value.disponible();
+			int[][] mat = value.disponible();
 				for (int i=0 ;i<mat[0].length;i++)
 				{
 					int cap = (int)(mat[1][i]);
 					if (cap > nb)
-					{System.out.println(mat[0][i]+" gouv "+value.get_nom_gouv()+" nb "+nb);
+					{System.out.println("\t\t\tNum Ref Centre : "+ mat[0][i] +"       Gouv :  "+value.get_nom_gouv()+"             Nb Personnes :  "+nb+"\n");
 					nb=0 ;
 					}
 					else
 					{	nb=nb-cap ;
-					System.out.println(mat[0][i]+" gouv "+value.get_nom_gouv()+" nb "+cap);}
+					System.out.println("\t\t\tNum Ref Centre : "+ mat[0][i] +"         Gouv :  "+value.get_nom_gouv()+"             Nb Personnes :  "+cap+"\n");}
 
 					if (nb<=0)
 					{
@@ -218,54 +220,83 @@ return(trie);
 				if (b)
 					break ;
 			}
-		System.out.println("total des affectations possibles "+(a-nb));
-		System.out.println("confirmer l'ajout : oui/non");
+		System.out.println("           *********************************  Confirmation  *************************************** \n");
+		System.out.print("                                             Saisir oui ou non : ");
 		String rep = cl.next();
 		if(rep.equalsIgnoreCase("oui"))
-		{				int j=0 ;
-
-			for (Gouvernorat value : V)
+		{
+		int d = a-nb;
+		for (Gouvernorat value : V)
 			{
-					try {
-						while((a-nb)>j)
-						{
-						System.out.println("nom "+j);
+			int[][] m=value.disponible();
+			for(int x=0 ;x<m[0].length;x++)
+			{
+ 					while(m[1][x]>0 & d>0)
+					{
+						System.out.print("Nom : ");
 						String nom = cl.next();
-						System.out.println("prenom "+j);
+						System.out.print("Prénom : ");
 						String prenom = cl.next();
-						System.out.println("cin "+j);
+						System.out.print("N°cin : ");
 						long cin = cl.nextLong();
-						System.out.println("date "+j);
-						String date = cl.next();
-						SimpleDateFormat f=new SimpleDateFormat("dd-MM-yyyy"); 
-					    Date d;
-						d = f.parse(date);
-						 Calendar cal = Calendar.getInstance();
-						    cal.setTime(d);
-							System.out.println("etat "+j);
-							int etat = cl.nextInt();
-							Personne_concernee p = new Personne_concernee(nom,prenom,cin,etat,cal);
-							value.ajouter(p);
-							j++;
-							 }
-								
+						Calendar cal = Calendar.getInstance();
+						Personne_concernee p = new Personne_concernee(nom,prenom,cin,0,cal);
+						value.ajouter(p,m[0][x]);
+						m[1][x]=m[1][x]-1;
+						d-- ;
 					}
-							
-					catch (ParseException e) {
-						System.out.println("date invalide") ;
-						System.exit(-1);}
+
+			}
 			}}
 					
 		
 	}
-	public void changer_sante(long cin ,int e) 
+	public void changer_sante(long cin ,int e,int ref) 
 {
 	for (Gouvernorat value : pays)
 	{
-		value.changer(cin, e);
+		value.changer(cin, e,ref);
 	}
 	    	
 }
+	public void evaluation(int ref)
+	{
+		int s=0; int n=0 ; int m=0 ;
+		try {
+			BufferedReader lecture = new BufferedReader(new FileReader("evaluation.txt")) ;
+			String l;
+			int i=0;
+			while ((l=lecture.readLine()) != null)
+			{
+				String temp[] = l.split("\t") ;
+
+				if(Integer.parseInt(temp[0])==ref)
+				{
+					s=s+Integer.parseInt(temp[1]);
+					n=n+Integer.parseInt(temp[2]);
+					m=m+Integer.parseInt(temp[3]);
+					i++;
+
+				}
+			}
+			if(i==0)
+				System.out.println("Pas de Notes pour L'instant");
+			else {
+			float s1 =Math.round((float)(s)/(float)(i));
+			float n1=Math.round((float)(n)/(float)(i));
+			float m1=Math.round((float)(m)/(float)(i));
+			System.out.println("Equipe médicale "+s1+"/20");
+			System.out.println("nourriture "+n1+"/20");
+			System.out.println("mesure d'hygiéne "+m1+"/20");}
+
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
 	public void hospitalisees(long ref)
 {
 		for (Gouvernorat value : pays)
@@ -273,9 +304,101 @@ return(trie);
 			value.hospitalisees(ref);
 		}
 }
+	public void Demande_docteur(String spec,String gouv)
+	{
+		Vector<Gouvernorat> V = plus_proche(gouv);
+		System.out.println("Les medecins disponibles spécialisés en "+spec+" "+"sont :\n");
+		for (Gouvernorat value : V)
+		{
+			try {
+				BufferedReader lecture = new BufferedReader(new FileReader("docteurs.txt")) ;
+				String l ;
+				String temp[] = new String[5] ;
+				boolean b=true;
+				while ((l=lecture.readLine()) != null)
+				{
+					temp= l.split("\t");
+					if ((value.get_nom_gouv().equalsIgnoreCase(temp[4]) == true) && (spec.equalsIgnoreCase(temp[3]) == true))
+					{
+						String nom = temp[0] , prenom = temp[1] , gov = temp[4] ;
+						long num = Integer.parseInt(temp[2]);
+						System.out.println("Dr "+nom+" "+prenom+" de l'hopital de "+gov+"\t N° Téléphone: "+num);
+						b=true;
+						break;
+					}
+				}
+				if(b==false) System.out.print("pas de médecins disponibles");
+				lecture.close();
+			}
+			catch (FileNotFoundException e) {
+				System.out.println("Fichier non trouvé") ;
+				System.exit(-1);
+			} 
+			catch (IOException e) {
+				System.out.println("Lecture impossible") ;
+				System.exit(-1);
+			}
+		}
 	
+}
+	public boolean existe(String gouv)
+	{ boolean b=false;
+			for (Gouvernorat value : pays)
+			{
+				if((value.get_nom_gouv()).equalsIgnoreCase(gouv))
+				{
+					b=true;
+					break;
+
+				}
+			}
+			if(b==false)
+				System.out.println("la gouvernorat n'est pas traité ou erreur de saisie  ");
+			return b;
+	}
+	
+	
+			
+	public boolean existe(int ref) {
+		boolean b=false;
+		for (Gouvernorat value : pays)
+		{if(value.existe_centre(ref))
+		{b=true;
+		break;
+			
+		}
+		}
+		if(b==false)
+			System.out.println("le centre de réference "+ref+" n'existe pas");
+		return b;
+		
+		
+		
+	}
+	public boolean existe_centre_cin(int ref,long cin) {
+		boolean b=false;
+		for (Gouvernorat value : pays)
+		
+		{if(value.existe_centre_cin(ref, cin)){
+			b=true;
+		
+		break;
+			
+		}
+		}
+		if(b==false)
+			System.out.println("les données n'existent pas ou l'un des données n'est pas trouvée");
+			
+		return b;
+		
+		
+		
+	}
 
 }
+			
+	
+
 		
 		
 

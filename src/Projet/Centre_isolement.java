@@ -10,7 +10,7 @@ import java.util.Vector;
 import java.util.Calendar;
 import java.util.Date;
 public class Centre_isolement {
-	private long num_ref ;
+	private int num_ref ;
 	private String Adresse ;
 	private String gouv_appartenance ;
 	private int max ;
@@ -18,7 +18,7 @@ public class Centre_isolement {
 	private  int nb_ac ;
 	private  int nb_malades ;
 	private Vector <Personne_concernee> personnes ;
-	public Centre_isolement (long num_ref,String Adresse,String gouv_appartenance,int max )
+	public Centre_isolement (int num_ref,String Adresse,String gouv_appartenance,int max )
 	{
 		this.num_ref=num_ref ;
 		this.Adresse=Adresse ;
@@ -34,7 +34,7 @@ public class Centre_isolement {
 				temp= l.split("\t");
 				if ( num_ref==(Integer.parseInt(temp[6])))
 				{
-					String nom = temp[0] , prenom = temp[1] , gov=temp[3] ;
+					String nom = temp[0] , prenom = temp[1] ;
 					long num = Integer.parseInt(temp[2]);	int etat = Integer.parseInt(temp[4]);
 				    SimpleDateFormat f=new SimpleDateFormat("dd-MM-yyyy"); 
 				    Date d=f.parse(temp[5]); 
@@ -70,7 +70,7 @@ public class Centre_isolement {
 	public void afficher_centre()
 	{
 		System.out.println("réference"+"\t\t"+"Adresse"+"\t\t\t"+"Gouvernorat"+"\t\t"+"chambres"+"\t\t"+"chambres_occupées");
-		System.out.println(num_ref+"\t\t\t"+Adresse+"\t\t\t"+gouv_appartenance+"\t\t"+max+"\t\t\t"+nb_actuel);
+		System.out.println(num_ref+"\t\t\t"+Adresse+"\t\t\t\t"+gouv_appartenance+"\t\t"+max+"\t\t\t"+nb_actuel);
 		
 	}
 	public void afficher_personnes()
@@ -79,6 +79,8 @@ public class Centre_isolement {
 		{
 			value.afficher_personne() ;
 		}
+		if(nb_ac==0)
+			System.out.println("Aucun Patient pour l'instant");
 	}
 	public int get_nbactuel()
 	{
@@ -96,7 +98,7 @@ public class Centre_isolement {
 	{
 		return(nb_malades) ;
 	}
-	public long get_ref()
+	public int get_ref()
 	{
 		return(num_ref) ;
 	}
@@ -121,6 +123,7 @@ public class Centre_isolement {
 		personnes.remove(p) ;
 		nb_actuel-- ;
 	}
+	
 	public Personne_concernee get_p(int i)
 	{
 		return(personnes.elementAt(i));
@@ -133,6 +136,19 @@ public class Centre_isolement {
 				value.setEtat_sante(e);
 		}
 	}
+	public int etat(long cin)
+	{
+		int e=0;
+		for (Personne_concernee value : personnes)
+		{
+			if(value.getNum_cin()==cin)
+				e=value.getEtat_sante();
+		}
+		return(e);
+
+
+		}
+
 	public void afficher_departs()
 	{
 			int i=0 ;
@@ -140,19 +156,41 @@ public class Centre_isolement {
 			{
 				if((value.getEtat_sante()==0 & value.fin_confinement()))
 					{i++;
-					value.afficher_personne();}
+					value.afficher_personne();
+					}
 			}
 			if(i==0)
 				System.out.println("pas de depart programmé pour aujourd'hui");
 	}
 	public void hospitalisees()
 	{
+		int i=0 ;
 		for (Personne_concernee value : personnes)
 		{
-			if(value.getEtat_sante()==1)
+			if(value.getEtat_sante()==2) {
 				value.afficher_personne();
+				i++;
+			}
+				
 		}
+		if(i==0)
+			System.out.println("Pas de cas critiques pour aujourd'hui");
 	}
+	public boolean existe(long cin)		// verifier l'existence d'une personne dans le centre
+    { boolean b=false;
+    for (Personne_concernee value : personnes) {
+    	
+    	if(value.getNum_cin()==cin)
+    	
+    	{
+    		b=true;
+    		break;
+    	}
+    	
+    }
+   
+    return b;
+    }
 	
 		
 	

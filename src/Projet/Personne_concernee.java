@@ -1,9 +1,5 @@
 package Projet;
-	import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
-import java.util.Date;
+	import java.util.Calendar;
 
 	public class Personne_concernee {
 	    private Calendar date_arrivee;
@@ -45,21 +41,20 @@ import java.util.Date;
 	    }
 	    public  void set_d_depart()
 	    {
-	    	Calendar auj = Calendar.getInstance() ;
-	    	date_depart=auj.getInstance();
+	    	date_depart=Calendar.getInstance();
 	    }
 	    public boolean fin_confinement(){
-	    	Calendar auj = Calendar.getInstance();
-	    	int mois = auj.get(auj.MONTH)+1 ;
-	    	int jour = auj.get(auj.DATE) ;
-	    	int annee = auj.get(auj.YEAR);
 	    	Calendar d = date_arrivee ;
 	    	d.add(Calendar.DATE,14);
-	    	int moisd = d.get(Calendar.MONTH) ; 
-	    	int jourd = d.get(Calendar.DATE) ;
+	    	Calendar auj = Calendar.getInstance();
+	    	int mois = auj.get(Calendar.MONTH)+1 ;
+	    	int jour = auj.get(Calendar.DATE) ;
+	    	int annee = auj.get(Calendar.YEAR);	    	
+	    	int moisd = d.get(Calendar.MONTH)+1; 
+	    	int jourd = d.get(Calendar.DATE);
 	    	int anneed = d.get(Calendar.YEAR);
 	    	d.add(Calendar.DATE,-14);
-	    	return (mois==(moisd+1) & jour==jourd & annee==anneed);
+	    	return (mois==moisd & jour==jourd & annee==anneed);
 	    	
 	    }
 	    public void afficher_personne()
@@ -67,7 +62,15 @@ import java.util.Date;
 	    	int m = date_arrivee.get(Calendar.MONTH) ; 
 	    	int j = date_arrivee.get(Calendar.DATE) ;
 	    	int a = date_arrivee.get(Calendar.YEAR);
-	    	System.out.println("Nom : "+nom+" Prenom : "+prenom+" N°cin : "+num_cin+" Etat de santé :"+etat_sante+" Date d'arrivée : "+ j+"/"+m+"/"+a) ;
+	    	String ch ="";
+	    	if(etat_sante==0)
+	    		ch="Bonne";
+	    	if(etat_sante==2)
+	    		ch="Critique";
+	    	if(etat_sante==1)
+	    		ch="Stable";
+
+	    	System.out.println("Nom :"+nom+"    Prenom :   "+prenom+"    N°cin : "+num_cin+"    Etat de santé :  "+ch+"    Date d'arrivée : "+ j+"/"+(1+m)+"/"+a) ;
 	    }
 	    
 

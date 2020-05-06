@@ -3,10 +3,9 @@ package Projet;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -29,7 +28,7 @@ public class Gouvernorat {
 					 String gov=temp[1];
 					if (temp[1].equalsIgnoreCase(nom))
 					{
-						long ref = Long.parseLong(temp[0]) ; 
+						int ref = Integer.parseInt(temp[0]) ; 
 						String ad = temp[2] ; int max=Integer.parseInt(temp[3]) ; 
 					    Centre_isolement c = new Centre_isolement(ref,ad,gov,max);
 						ajouter_centre(c) ;
@@ -43,16 +42,6 @@ public class Gouvernorat {
 				System.out.println("Lecture impossible") ;
 				System.exit(-1);
 			} 
-	    }
-	    public boolean est_unique(long ref)
-	    {
-    		boolean b = false;
-	    	for (Centre_isolement value : centres)
-    		{
-	    	if((value.get_ref()==ref))
-	    		b=true ;
-    		}
-	    	return(b);
 	    }
 	    public void ajouter_centre(Centre_isolement c)
 	    {
@@ -68,7 +57,7 @@ public class Gouvernorat {
 	            value.afficher_centre();
 	        }
 	    }
-	    public float personnes_contamines()
+	    public float personnes_contamines()  // satistiques 
 	    {
 	        float s = 0;
 	        float q = 0;
@@ -78,25 +67,31 @@ public class Gouvernorat {
 	            q =q+ (value.get_malades());
 
 	        }
-	        System.out.println(((float)(q/s))*100);
-	        return((q/s)*100);
+	        if(s==0)
+	        	{System.out.println("les statistiques de contamination est de 0%");
+	        	return(0);}
+	        else {
+		        System.out.println("les statistiques de contamination est de "+((float)(q/s))*100+"%");
+	        	return((q/s)*100);
+
+	        }
 	    }
-	    public float personne_contaminees(long ref)
+	    public float personne_contamines(int ref) //statistiques
 	    {
 	    	float a =0;
 	    	for (Centre_isolement value : centres)
 			{
 				
 				if(value.get_ref()==ref)
-			    	{a=(((float)value.get_malades())/((float)value.get_ac()))*100 ;
-				System.out.println(a);}
+			    	{if((float)value.get_malades()==0)System.out.println("les statistiques de contamination est de 0%");
+			    	else {
+			    	a=(((float)value.get_malades())/((float)value.get_ac()))*100 ;
+			    	System.out.println("\nles statistiques de contamination est de "+a+"%");
+			    	break ;}}
 			}
 			return (a);
 	    }
-	    public void afficher_gouvernorat()
-	    {
-	    	System.out.println("nom "+nom+" centre "+nb_c);
-	    }
+
 	    public String get_nom_gouv()
 	    {
 	    	return(nom);
@@ -105,32 +100,57 @@ public class Gouvernorat {
 	    {
 	    	return(nb_c);
 	    }
-	    public void afficher_personnes(long ref)
+	    public void afficher_personnes(int ref)
 	    {
 	    		for (Centre_isolement value : centres)
 	    		{
 	    			if((value.get_ref()==ref))
-	    					value.afficher_personnes();
+	    					{
+	    				value.afficher_personnes();
+	    				break ;
+	    					}
 	    		}
 			}
-	    public void supprimer(long cin , long ref)
+	    public void supprimer(long cin , int ref)
 	    {
 	    	for (Centre_isolement value : centres)
     		{
-    			if(est_unique(ref)==true)
+    			if(value.get_ref()==ref)
     			{
     				for (int i=0 ;i<value.get_nbactuel();i++)
-    		    		{if((value.get_p(i)).getNum_cin()==cin)
-    	    					value.supprimer(value.get_p(i));}
-    	    		}
+		    		{if((value.get_p(i)).getNum_cin()==cin)
+		    		{
+		    			if(value.etat(cin)!=2)
+	    				{
+	    					Scanner ab = new Scanner(System.in); 
+	    					System.out.print("Note Equipe médicale : ");
+	    					int a = ab.nextInt();
+	    					System.out.print("Note nourriture");
+	    					int b = ab.nextInt();
+	    					System.out.print("Note mesure d'hygiéne");
+	    					int c = ab.nextInt();
+							try {
+								PrintWriter ecriture = new PrintWriter (new FileWriter("evaluation.txt", true));
+								ecriture.println(ref+"\t"+a+"\t"+b+"\t"+c) ;
+								ecriture.close();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+		    		}
+						value.supprimer(value.get_p(i));
+	    		}}
+    				
     			}
-	    		
-	    }
-	    public void changer(long cin , int e)
+      	    		}}
+	    public void changer(long cin , int e,int ref)
 	    {
 	    	for (Centre_isolement value : centres)
 	    	{
-	    		value.changer(cin, e);
+	    		if(value.get_ref()==ref)
+	    		{
+		    		value.changer(cin, e);
+		    		break;
+	    		}
 	    	}
 	    }
 	    public void afficher_departs(long ref)
@@ -138,20 +158,26 @@ public class Gouvernorat {
 	    	for (Centre_isolement value : centres)
 				{
 				if(value.get_ref()==ref)	
-	    		value.afficher_departs();
+					{value.afficher_departs();
+					break ;
+					}
+				
 				}
 		}
 	    public void hospitalisees(long ref)
 		{
 	    	for (Centre_isolement value : centres)
 				{
-				if(value.get_ref()==ref)	
-	    		value.hospitalisees();
+				if(value.get_ref()==ref)
+				{
+		    		value.hospitalisees();
+		    		break;
+				}
 				}
 		}
-	    public long[][] disponible()
+	    public int[][] disponible() //disponibilités des centres d'isolements
 	    {
-	    	long mat[][]= new long [2][20];
+	    	int mat[][]= new int [2][15];
 	    	int i=0 ;
 	    	for (Centre_isolement value : centres)
 	    	{
@@ -162,7 +188,7 @@ public class Gouvernorat {
 		    			i++ ;
 					}
 					}
-	    	long mat2[][]= new long [2][i] ;
+	    	int mat2[][]= new int [2][i] ;
 	    	for (int e=0 ;e<2 ;e++)
 	    	{
 	    		for(int f=0 ;f<i;f++)
@@ -174,14 +200,46 @@ public class Gouvernorat {
     	return(mat2);
 	    }
 	   
-	    public void ajouter(Personne_concernee p)
+	    public void ajouter(Personne_concernee p,int ref)
 	    {
 	    	for (Centre_isolement value : centres)
 			{
-				value.ajouter_personne(p);
+				if(value.get_ref()==ref) {
+					value.ajouter_personne(p);
+					break ;}
 			}
 	    	
 	    }
+	    boolean existe_centre_cin(int ref,long cin)		//existence d'une personne dans un centre donné
+	    { boolean b=false;
+	    	for (Centre_isolement value : centres)
+			{
+	    		if(value.get_ref()==ref)	
+	    			if(value.existe(cin)) {
+	    				b=true;
+	    				break;
+	    				
+	    			
+	    		}
+	    			
+			}
+	   return b;
+	    }
+	    boolean existe_centre(int ref)	//existence d'un centre dans le gouvernorat
+	    { boolean b=false;
+    	for (Centre_isolement value : centres)
+		{
+    		if(value.get_ref()==ref)	
+    		{
+    				b=true;
+    				break;
+    				
+    			
+    		}
+		}
+   return b;
+    }
+	   
 	    }
 	    
 	 
