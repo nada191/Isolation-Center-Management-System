@@ -79,7 +79,7 @@ public class Centre_isolement {
 		{
 			value.afficher_personne() ;
 		}
-		if(nb_ac==0)
+		if(nb_actuel==0)
 			System.out.println("Aucun Patient pour l'instant");
 	}
 	public int get_nbactuel()

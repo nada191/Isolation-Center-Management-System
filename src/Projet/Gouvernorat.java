@@ -120,15 +120,22 @@ public class Gouvernorat {
     				for (int i=0 ;i<value.get_nbactuel();i++)
 		    		{if((value.get_p(i)).getNum_cin()==cin)
 		    		{
+		    			
 		    			if(value.etat(cin)!=2)
 	    				{
 	    					Scanner ab = new Scanner(System.in); 
 	    					System.out.print("Note Equipe médicale : ");
 	    					int a = ab.nextInt();
+	    					if(a==-1)
+	    						break ;
 	    					System.out.print("Note nourriture");
 	    					int b = ab.nextInt();
+	    					if(a==-1)
+	    						break ;
 	    					System.out.print("Note mesure d'hygiéne");
 	    					int c = ab.nextInt();
+	    					if(c==-1)
+	    						break ;
 							try {
 								PrintWriter ecriture = new PrintWriter (new FileWriter("evaluation.txt", true));
 								ecriture.println(ref+"\t"+a+"\t"+b+"\t"+c) ;
@@ -138,6 +145,7 @@ public class Gouvernorat {
 							}
 		    		}
 						value.supprimer(value.get_p(i));
+
 	    		}}
     				
     			}

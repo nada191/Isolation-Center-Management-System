@@ -226,27 +226,37 @@ return(trie);
 		if(rep.equalsIgnoreCase("oui"))
 		{
 		int d = a-nb;
+		boolean test= true ;
 		for (Gouvernorat value : V)
-			{
+			{ 
 			int[][] m=value.disponible();
 			for(int x=0 ;x<m[0].length;x++)
-			{
+			{int j=1 ;
  					while(m[1][x]>0 & d>0)
 					{
-						System.out.print("Nom : ");
+						System.out.print("Nom "+" "+j+" :");
 						String nom = cl.next();
-						System.out.print("Prénom : ");
+						if(nom.equalsIgnoreCase("-1"))
+								{test=false ;break ; }
+						System.out.print("Prénom "+" "+j+" :");
 						String prenom = cl.next();
-						System.out.print("N°cin : ");
+						if(prenom.equalsIgnoreCase("-1"))
+						{test=false ;break ; }
+						System.out.print("N°cin "+" "+j+" :");
 						long cin = cl.nextLong();
+						if(cin==-1)
+						{test=false ;break ; }
 						Calendar cal = Calendar.getInstance();
 						Personne_concernee p = new Personne_concernee(nom,prenom,cin,0,cal);
 						value.ajouter(p,m[0][x]);
 						m[1][x]=m[1][x]-1;
 						d-- ;
+						j++ ;
 					}
+ 					if (test==false) break ;
 
 			}
+			if(test==false) break ;
 			}}
 					
 		
@@ -322,7 +332,7 @@ return(trie);
 					{
 						String nom = temp[0] , prenom = temp[1] , gov = temp[4] ;
 						long num = Integer.parseInt(temp[2]);
-						System.out.println("Dr "+nom+" "+prenom+" de l'hopital de "+gov+"\t N° Téléphone: "+num);
+						System.out.println("Dr "+nom+" "+prenom+" de l'hopital de "+gov+"\t N°Téléphone: "+num);
 						b=true;
 						break;
 					}
@@ -387,7 +397,7 @@ return(trie);
 		}
 		}
 		if(b==false)
-			System.out.println("les données n'existent pas ou l'un des données n'est pas trouvée");
+			System.out.println("les données n'existent pas ou l'une des données n'est pas trouvée");
 			
 		return b;
 		

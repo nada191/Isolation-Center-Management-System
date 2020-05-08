@@ -15,3 +15,4 @@ gtf	fgght	14897775	Mednine	2	16-04-2020	2
 gtf	fgght	17777777	Mednine	2	16-04-2020	2
 mourad	kgjj	33321458	Bizerte	2	09-04-2020	12
 amina	benselem	14789662	Kairouan	2	21-04-2020	15
+mourad	kgjj	33321458	Bizerte	0	24-04-2020	12
