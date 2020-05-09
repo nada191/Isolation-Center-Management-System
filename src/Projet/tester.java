@@ -1,11 +1,32 @@
 package Projet;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class tester {
 
 	public static void main(String[] args) {
 		Manipulation m = new Manipulation();
+		String tab[] = new String [10];
+			try {
+				BufferedReader lecture;
+				lecture = new BufferedReader(new FileReader("pays.txt"));
+				String l = lecture.readLine() ;
+				String temp[] = l.split("\t") ;
+				for (int i=0 ; i<temp.length;i++)
+				{
+					tab[i]=temp[i];
+				}
+				lecture.close();
+			} catch (FileNotFoundException e1) {
+				System.out.println("Fichier non trouvé");
+			} catch (IOException e) {
+				System.out.println("Lecture impossible");
+			}
+			
 		
 		String fonctionalite ="********************\tSystéme de gestion des centres d'isolements\t********************\n\n"+"Note : Il suffit de tapez le numéro correspondant au votre choix  (Tapez -1 pour echapper une opération )\n\n  "+
 		"\t1/ Affecter des personnes\n\n"+"\t2/ Liste des personnes ayant terminée leur période d'isolement\n\n"+
@@ -23,7 +44,7 @@ public class tester {
 		{		
 		boolean test = false;
 		while (test==false)
-		{					Scanner cl = new Scanner(System.in);
+		{       Scanner cl = new Scanner(System.in);
 			int ad=0 ;
 			boolean t =true ;
 			while(t)
@@ -45,7 +66,7 @@ public class tester {
 			try {
 				boolean b =true ;
 				System.out.println("combien de personne? et leur gouvernorat? :");
-				System.out.println("\t -Manouba\t\t\t -Sfax\n\t -Bizerte\t\t\t -Tunis\n\t -Gabes\t\t\t\t -Mednine\n\t -Nabeul\t\t\t -Tataouine\n\t -Kairouan\t\t\t -Monastir\n");
+				System.out.println("\t -"+(tab[0])+"\t\t\t -"+(tab[1])+"\n\t -"+(tab[2])+"\t\t\t -"+(tab[3])+"\n\t -"+(tab[4])+"\t\t -"+(tab[5])+"\n\t -"+(tab[6])+"\t\t -"+(tab[7])+"\n\t -"+(tab[8])+"\t\t -"+(tab[9])+"\n");
 				String nb =cl.nextLine();
 				int nbre=Integer.parseInt(nb);
 				if(nb.equalsIgnoreCase("-1")|| nb.equalsIgnoreCase("0"))
@@ -116,7 +137,7 @@ public class tester {
 		while(ad==4) {	
 		boolean b = true ;
 		System.out.print("Dans quel gouvernorat? : ");
-		System.out.println("\t -Manouba\t\t\t -Sfax\n\t -Bizerte\t\t\t -Tunis\n\t -Gabes\t\t\t\t -Mednine\n\t -Nabeul\t\t\t -Tataouine\n\t -Kairouan\t\t\t -Monastir\n");
+		System.out.println("\t -"+(tab[0])+"\t\t\t -"+(tab[1])+"\n\t -"+(tab[2])+"\t\t\t -"+(tab[3])+"\n\t -"+(tab[4])+"\t\t -"+(tab[5])+"\n\t -"+(tab[6])+"\t\t -"+(tab[7])+"\n\t -"+(tab[8])+"\t\t -"+(tab[9])+"\n");
 		String gouv =cl.nextLine();
 		if(gouv.equalsIgnoreCase("-1"))
 		{
@@ -131,7 +152,7 @@ public class tester {
 			
 		}while(ad==5) {
 			boolean b=true ;
-			System.out.println("\t -Manouba\t\t\t -Sfax\n\t -Bizerte\t\t\t -Tunis\n\t -Gabes\t\t\t\t -Mednine\n\t -Nabeul\t\t\t -Tataouine\n\t -Kairouan\t\t\t -Monastir\n");
+			System.out.println("\t -"+(tab[0])+"\t\t\t -"+(tab[1])+"\n\t -"+(tab[2])+"\t\t\t -"+(tab[3])+"\n\t -"+(tab[4])+"\t\t -"+(tab[5])+"\n\t -"+(tab[6])+"\t\t -"+(tab[7])+"\n\t -"+(tab[8])+"\t\t -"+(tab[9])+"\n");
 			System.out.print("De quel gouvernorat? : ");
 			String g =cl.nextLine();
 			if(g.equalsIgnoreCase("-1"))
@@ -165,7 +186,7 @@ public class tester {
 			
 		while(ad==7) {
 			boolean b =true ;
-			System.out.println("\t -Manouba\t\t\t -Sfax\n\t -Bizerte\t\t\t -Tunis\n\t -Gabes\t\t\t\t -Mednine\n\t -Nabeul\t\t\t -Tataouine\n\t -Kairouan\t\t\t -Monastir\n");
+			System.out.println("\t -"+(tab[0])+"\t\t\t -"+(tab[1])+"\n\t -"+(tab[2])+"\t\t\t -"+(tab[3])+"\n\t -"+(tab[4])+"\t\t -"+(tab[5])+"\n\t -"+(tab[6])+"\t\t -"+(tab[7])+"\n\t -"+(tab[8])+"\t\t -"+(tab[9])+"\n");
 			System.out.print("Donner le gouvernorat : "); 
 			String gouv =cl.nextLine();
 			if(gouv.equalsIgnoreCase("-1"))
@@ -293,7 +314,7 @@ public class tester {
 			}
 		}while(ad==12) {
 			boolean b = true ;
-			System.out.println("\t -Manouba\t\t\t -Sfax\n\t -Bizerte\t\t\t -Tunis\n\t -Gabes\t\t\t\t -Mednine\n\t -Nabeul\t\t\t -Tataouine\n\t -Kairouan\t\t\t -Monastir\n");
+			System.out.println("\t -"+(tab[0])+"\t\t\t -"+(tab[1])+"\n\t -"+(tab[2])+"\t\t\t -"+(tab[3])+"\n\t -"+(tab[4])+"\t\t -"+(tab[5])+"\n\t -"+(tab[6])+"\t\t -"+(tab[7])+"\n\t -"+(tab[8])+"\t\t -"+(tab[9])+"\n");
 			System.out.print("Dans quel gouvernorat? : ");
 			String gouv =cl.nextLine();
 			if(gouv.equalsIgnoreCase("-1"))
