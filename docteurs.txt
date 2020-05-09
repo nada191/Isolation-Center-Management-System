@@ -12,7 +12,3 @@ Ahmed	Ali	41258963	réanimation	Bizerte
 Amina	Hlel	28963547	pneumologie	Bizerte
 kacem	Nihel	4654654	urgence	Bizerte
 kacem	Nihel	46546054	gériatrie	Sfax
-
-
-
-
