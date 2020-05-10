@@ -33,7 +33,7 @@ public class Manipulation {
 						distances[j][i]=Float.parseFloat(temp2[i]) ;
 					}
 					j++ ;
-				
+
 			}
 			lecture.close();
 		} catch (FileNotFoundException e) {
@@ -49,21 +49,21 @@ public class Manipulation {
 	{
 		for (Gouvernorat value : pays)
 		{
-			
+
 			value.afficher_departs(ref);		}
 	}
 	public void afficher_centres(String g)
 	{
 		for(Gouvernorat value : pays)
     {
-        
+
 			if ((value.get_nom_gouv()).equalsIgnoreCase(g))
 			{
 				value.afficher_centres();
 				break;
 			}
     }
-		
+
 	}
 	public void afficher_personnes(int ref) // par centre
 	{
@@ -72,10 +72,10 @@ public class Manipulation {
 			value.afficher_personnes(ref);
 		}
 
-				
+
 		}
 	public void ajouter_centre(String g)
-	{Scanner clavier = new Scanner(System.in); 
+	{Scanner clavier = new Scanner(System.in);
 	int i=1 ;
 	for (Gouvernorat value : pays)
 	{
@@ -83,7 +83,7 @@ public class Manipulation {
 	}
 	for (Gouvernorat value : pays)
 		{
-			
+
 			if((value.get_nom_gouv()).equalsIgnoreCase(g))
 				{ boolean b = true;
 				while(b)
@@ -104,8 +104,8 @@ public class Manipulation {
 						b=true;
 					}
 				}
-				
-				
+
+
 		}
 		}}
 	public void supprimer_personne(long cin , int ref)
@@ -157,7 +157,7 @@ public class Manipulation {
 			tab[f]=distances[i][f];
 
 			}
-		
+
 		float min;
 		int m ;
 		boolean b=true;
@@ -175,17 +175,17 @@ public class Manipulation {
 					indice[k]=indice[k+1];
 					indice[k+1]=m;
 					b=true;
-							
+
 				}
 			}
 		}
 for(int e=0;e<10;e++)
 {
 	trie.setElementAt(pays.elementAt(indice[e]),e);
-	
+
 }
 return(trie);
-		
+
 	}
 	void Demande(int nb , String gouv)
 	{
@@ -197,6 +197,7 @@ return(trie);
 		int a =nb ;
 		Scanner cl = new Scanner(System.in);
 		Vector<Gouvernorat> V = plus_proche(gouv);
+		long CIN [] = new long[nb];//test
 		for (Gouvernorat value : V) {
 			int[][] mat = value.disponible();
 				for (int i=0 ;i<mat[0].length;i++)
@@ -227,11 +228,12 @@ return(trie);
 		{
 		int d = a-nb;
 		boolean test= true ;
+		int j=1 ;
 		for (Gouvernorat value : V)
-			{ 
+			{
 			int[][] m=value.disponible();
 			for(int x=0 ;x<m[0].length;x++)
-			{int j=1 ;
+			{
  					while(m[1][x]>0 & d>0)
 					{
 						System.out.print("Nom "+" "+j+" :");
@@ -242,8 +244,23 @@ return(trie);
 						String prenom = cl.next();
 						if(prenom.equalsIgnoreCase("-1"))
 						{test=false ;break ; }
-						System.out.print("N°cin "+" "+j+" :");
-						long cin = cl.nextLong();
+						boolean t =true ;
+						long cin =0 ;
+						String c ;
+						while(t){
+						try
+						{
+							
+							System.out.print("N°cin "+" "+j+" :");
+							c = cl.next();
+							cin=Long.parseLong(c);
+							t=false ;
+						}
+						catch(Exception e)
+						{
+							System.out.println("cin invalide");
+							t=true ;
+						}}
 						if(cin==-1)
 						{test=false ;break ; }
 						Calendar cal = Calendar.getInstance();
@@ -258,16 +275,16 @@ return(trie);
 			}
 			if(test==false) break ;
 			}}
-					
-		
+
+
 	}
-	public void changer_sante(long cin ,int e,int ref) 
+	public void changer_sante(long cin ,int e,int ref)
 {
 	for (Gouvernorat value : pays)
 	{
 		value.changer(cin, e,ref);
 	}
-	    	
+
 }
 	public void evaluation(int ref)
 	{
@@ -299,11 +316,11 @@ return(trie);
 			System.out.println("nourriture "+n1+"/20");
 			System.out.println("mesure d'hygiéne "+m1+"/20");}
 
-			
+
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("Fichier non trouvé");
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Lecture impossible");
 		}
 
 	}
@@ -342,14 +359,12 @@ return(trie);
 			}
 			catch (FileNotFoundException e) {
 				System.out.println("Fichier non trouvé") ;
-				System.exit(-1);
-			} 
+			}
 			catch (IOException e) {
 				System.out.println("Lecture impossible") ;
-				System.exit(-1);
 			}
 		}
-	
+
 }
 	public boolean existe(String gouv)
 	{ boolean b=false;
@@ -366,49 +381,49 @@ return(trie);
 				System.out.println("la gouvernorat n'est pas traité ou erreur de saisie  ");
 			return b;
 	}
-	
-	
-			
+
+
+
 	public boolean existe(int ref) {
 		boolean b=false;
 		for (Gouvernorat value : pays)
 		{if(value.existe_centre(ref))
 		{b=true;
 		break;
-			
+
 		}
 		}
 		if(b==false)
 			System.out.println("le centre de réference "+ref+" n'existe pas");
 		return b;
-		
-		
-		
+
+
+
 	}
 	public boolean existe_centre_cin(int ref,long cin) {
 		boolean b=false;
 		for (Gouvernorat value : pays)
-		
+
 		{if(value.existe_centre_cin(ref, cin)){
 			b=true;
-		
+
 		break;
-			
+
 		}
 		}
 		if(b==false)
 			System.out.println("les données n'existent pas ou l'une des données n'est pas trouvée");
-			
+
 		return b;
-		
-		
-		
+
+
+
 	}
 
 }
-			
-	
 
-		
-		
+
+
+
+
 

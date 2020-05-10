@@ -26,8 +26,8 @@ public class tester {
 			} catch (IOException e) {
 				System.out.println("Lecture impossible");
 			}
-			
-		
+
+
 		String fonctionalite ="********************\tSystéme de gestion des centres d'isolements\t********************\n\n"+"Note : Il suffit de tapez le numéro correspondant au votre choix  (Tapez -1 pour echapper une opération )\n\n  "+
 		"\t1/ Affecter des personnes\n\n"+"\t2/ Liste des personnes ayant terminée leur période d'isolement\n\n"+
 		"\t3/ Liste de toutes les personnes qui habitent un centre d'isolement\n\n"+
@@ -41,7 +41,7 @@ public class tester {
 		"\t11/ Evaluer les services de votre centre d'isolement\n\n"+
 		"\t12/ Demande d'un medecin disponible\n\n";
 		System.out.println(fonctionalite);
-		{		
+		{
 		boolean test = false;
 		while (test==false)
 		{       Scanner cl = new Scanner(System.in);
@@ -54,46 +54,47 @@ public class tester {
 					 String adr = cl.nextLine();
 					 ad=Integer.parseInt(adr);
 					 t=false;
-					
+
 				}
 				catch(Exception e)
 				{
 					t=true;
 				}
 			}
-			
+
+
 		while(ad==1) {
-			try {
 				boolean b =true ;
 				System.out.println("combien de personne? et leur gouvernorat? :");
 				System.out.println("\t -"+(tab[0])+"\t\t\t -"+(tab[1])+"\n\t -"+(tab[2])+"\t\t\t -"+(tab[3])+"\n\t -"+(tab[4])+"\t\t -"+(tab[5])+"\n\t -"+(tab[6])+"\t\t -"+(tab[7])+"\n\t -"+(tab[8])+"\t\t -"+(tab[9])+"\n");
-				String nb =cl.nextLine();
-				int nbre=Integer.parseInt(nb);
+				String nb ="" ;
+				try {
+				nb=cl.nextLine();
+				int e=Integer.parseInt(nb);
+				}
+				catch(Exception e) {
+					System.out.println("\nerreur de saisie veuillez réessayer ");
+					break ;
+				}
 				if(nb.equalsIgnoreCase("-1")|| nb.equalsIgnoreCase("0"))
 				{
 					b=false;
 				}
 				if(b==false) break ;
-
-				String gouv =cl.nextLine();
+				String gouv ="" ;
+				gouv =cl.nextLine();
 				if(gouv.equalsIgnoreCase("-1"))
 				{
 					b=false;
 				}
 				if(b==false) break ;
 				if(m.existe(gouv)) {
-				m.Demande(nbre,gouv);
+				m.Demande(Integer.parseInt(nb),gouv);
 				b=false;
 				}
 				if(b==false) break ;
 				}
-				catch(Exception e) {
-					System.out.println("\nerreur de saisie veuillez réessayer ");
-					ad=1;
-				}
-				
-			}
-			
+
 		while(ad==2) {
 			try {
 				boolean b=true ;
@@ -111,7 +112,7 @@ public class tester {
 			}catch(Exception e) {
 			System.out.println("\nerreur de saisie, veuillez réessayer  ");
 			ad=2;
-		}	
+		}
 		}
 		while(ad==3) {
 			try {
@@ -131,10 +132,10 @@ public class tester {
 			System.out.println("\nerreur de saisie veuillez réessayer \n ");
 			ad=3;
 		}
-		
-			
+
+
 		}
-		while(ad==4) {	
+		while(ad==4) {
 		boolean b = true ;
 		System.out.print("Dans quel gouvernorat? : ");
 		System.out.println("\t -"+(tab[0])+"\t\t\t -"+(tab[1])+"\n\t -"+(tab[2])+"\t\t\t -"+(tab[3])+"\n\t -"+(tab[4])+"\t\t -"+(tab[5])+"\n\t -"+(tab[6])+"\t\t -"+(tab[7])+"\n\t -"+(tab[8])+"\t\t -"+(tab[9])+"\n");
@@ -148,8 +149,8 @@ public class tester {
 		m.ajouter_centre(gouv);
 		ad=0 ;
 		}
-		
-			
+
+
 		}while(ad==5) {
 			boolean b=true ;
 			System.out.println("\t -"+(tab[0])+"\t\t\t -"+(tab[1])+"\n\t -"+(tab[2])+"\t\t\t -"+(tab[3])+"\n\t -"+(tab[4])+"\t\t -"+(tab[5])+"\n\t -"+(tab[6])+"\t\t -"+(tab[7])+"\n\t -"+(tab[8])+"\t\t -"+(tab[9])+"\n");
@@ -162,7 +163,7 @@ public class tester {
 			if(b==false) break ;
 			if(m.existe(g)) {
 			m.afficher_centres(g); ad=0 ;}
-			
+
 		}while(ad==6) {try {
 			boolean b=true ;
 			System.out.print("Donner la réference du centre : ");
@@ -176,18 +177,18 @@ public class tester {
 		    if(m.existe(ref)) {
 		    m.statistiques_centre(ref); b=false ;}
 		    if(b==false) break ;
-		
+
 		}catch(Exception e) {
 			System.out.println("\nerreur de saisie veuillez réessayer  ");
 			ad=6 ;
 		}
 		}
-		
-			
+
+
 		while(ad==7) {
 			boolean b =true ;
 			System.out.println("\t -"+(tab[0])+"\t\t\t -"+(tab[1])+"\n\t -"+(tab[2])+"\t\t\t -"+(tab[3])+"\n\t -"+(tab[4])+"\t\t -"+(tab[5])+"\n\t -"+(tab[6])+"\t\t -"+(tab[7])+"\n\t -"+(tab[8])+"\t\t -"+(tab[9])+"\n");
-			System.out.print("Donner le gouvernorat : "); 
+			System.out.print("Donner le gouvernorat : ");
 			String gouv =cl.nextLine();
 			if(gouv.equalsIgnoreCase("-1"))
 			{
@@ -197,15 +198,15 @@ public class tester {
 			if(m.existe(gouv)) {
 			m.statistiques_gouv( gouv);
 			ad=0 ;}
-			
-		
-		
-		
-			
+
+
+
+
+
 		}while(ad==8) {
 			try {
 				boolean b=true;
-			System.out.print("Donner son numéro de cin :"); 
+			System.out.print("Donner son numéro de cin :");
 			String c =cl.nextLine();
 		    long cin =  Long.parseLong(c);
 		    if(c.equalsIgnoreCase("-1"))
@@ -214,7 +215,7 @@ public class tester {
 			}
 			if(b==false) break ;
 		    System.out.print("Donner la réference du centre auquel elle appartient :");
-		    String nbre =cl.nextLine();	
+		    String nbre =cl.nextLine();
 		    int ref =  Integer.parseInt(nbre);
 		    if(nbre.equalsIgnoreCase("-1"))
 			{
@@ -224,11 +225,11 @@ public class tester {
 	        if(m.existe_centre_cin(ref,cin)) {
 		    m.supprimer_personne(cin, ref);
 		    b=false ;
-		
+
 	}
 	if(b==false) break ;
 	}
-	
+
 	catch(Exception e) {
 		System.out.println("\nerreur de saisie veuillez réessayer \n ");
 	ad=8;
@@ -244,9 +245,10 @@ public class tester {
 					b=false;
 				}
 				if(b==false) break ;
-			    System.out.println("Taper: 0 si en bon santé ou la contamination n'est pas confirmée\n 1 si malade (situation grave (corona))\n 2 si situation normale (corona)");
+			    System.out.println("Taper: 0 si en bon santé ou la contamination n'est pas confirmée\n 1  si situation normale (corona) \n 2 si malade (situation grave (corona))");
 			    String et =cl.nextLine();
 			    int etat =  Integer.parseInt(et);
+			    if(etat!=0 && etat!=1 && etat!=2) throw new Err();
 			    if(et.equalsIgnoreCase("-1"))
 				{
 					b=false;
@@ -266,6 +268,10 @@ public class tester {
 			    b=false;}
 			    if(b==false) break ;
 		}
+		catch (Err e)
+			{
+			System.out.println("La réponse doit etre 0 , 1 ou 2"); ad=9;
+			}
 		
 		catch(Exception e) {
 			System.out.println("\nerreur de saisie veuillez réessayer \n ");
@@ -277,7 +283,7 @@ public class tester {
 			try {
 				boolean b= true ;
 				System.out.print("Donner la réference du centre à visualiser : ");
-				 String nbre =cl.nextLine();	
+				 String nbre =cl.nextLine();
 				    int ref =  Integer.parseInt(nbre);
 				    if(nbre.equalsIgnoreCase("-1"))
 					{
@@ -292,12 +298,12 @@ public class tester {
 				System.out.println("\nerreur de saisie veuillez réessayer \n ");
 				ad=10;
 			}
-			
+
 		}while(ad==11) {
 			try {
 				boolean b= true ;
 				System.out.print("Donner la réference du centre auquel elle appartient : ");
-				 String nbre =cl.nextLine();	
+				 String nbre =cl.nextLine();
 				  int ref =  Integer.parseInt(nbre);
 				  if(nbre.equalsIgnoreCase("-1"))
 					{
@@ -342,15 +348,15 @@ public class tester {
 				m.Demande_docteur("Pédiatrie",gouv);
 				if(sp==4)
 					m.Demande_docteur("Réanimation",gouv);
-				
+
 			}
-			
-			
-			
+
+
+
 		}
-		
-		
-		
+
+
+
 	//retour au menu principal
 		boolean b=true ;
 		while(b)
@@ -366,10 +372,10 @@ public class tester {
 				b=true;
 			}
 		}
-		  
+
 		}
-		
+
 	}
 	}
-	
+
 	}

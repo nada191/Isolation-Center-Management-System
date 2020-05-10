@@ -130,7 +130,7 @@ public class Gouvernorat {
 	    						break ;
 	    					System.out.print("Note nourriture");
 	    					int b = ab.nextInt();
-	    					if(a==-1)
+	    					if(b==-1)
 	    						break ;
 	    					System.out.print("Note mesure d'hygiéne");
 	    					int c = ab.nextInt();

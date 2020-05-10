@@ -4,13 +4,13 @@ meher	bensalah	14796325	Tunis	2	19-4-2020	10
 saadi	ahmed	14529856	Manouba	1	20-02-2019	3
 mourad	gharbi	14587965	Manouba	1	09-04-2020	3
 mourad	kgjj	78965478	Manouba	1	09-04-2020	4
-mourad	kgjkj	78965478	Manouba	0	19-04-2020	4
+mourad	kgjkj	78965478	Manouba	0	26-04-2020	4
 mourad	gharbi	14587875	Mednine	1	17-03-2019	8
 amir	ben	66656565	Gabes	1	15-03-2020	6
 mourad	gharbi	15000075	Tunis	0	17-03-2019	11
 mourad	ghart	14587875	Tunis	0	16-04-2020	11
 aze	fgght	10000000	Mednine	0	16-04-2020	2
-ddd	fgght	14000002	Mednine	0	16-04-2020	2
+ddd	fgght	14000002	Mednine	0	29-04-2020	2
 gtf	fgght	14897775	Mednine	2	16-04-2020	2
 gtf	fgght	17777777	Mednine	2	16-04-2020	2
 mourad	kgjj	33321458	Bizerte	2	09-04-2020	12
