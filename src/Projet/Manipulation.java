@@ -92,8 +92,10 @@ public class Manipulation {
 						System.out.print("donnez la capacite du nouveau centre : ");
 						String c1 = clavier.nextLine();
 						int cap = Integer.parseInt(c1);
+						if(cap==-1) break ;
 						System.out.print("\ndonnez son adresse : ");
 						String ad = clavier.next();
+						if(ad.equalsIgnoreCase("-1")) break ;
 						Centre_isolement c = new Centre_isolement(i,ad,g,cap);
 						value.ajouter_centre(c);
 					System.out.println("la reference accordee a ce centre est : "+i);

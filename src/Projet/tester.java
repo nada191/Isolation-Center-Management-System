@@ -247,12 +247,12 @@ public class tester {
 			    System.out.println("Taper: 0 si en bonne santé ou la contamination n'est pas confirmée\n 1  si situation normale (corona) \n 2 si malade (situation grave (corona))");
 			    String et =cl.nextLine();
 			    int etat =  Integer.parseInt(et);
-			    if(etat!=0 && etat!=1 && etat!=2) throw new Err();
 			    if(et.equalsIgnoreCase("-1"))
 				{
 					b=false;
 				}
 				if(b==false) break ;
+			    if(etat!=0 && etat!=1 && etat!=2) throw new Err();
 			    System.out.print("Donner la réference du centre : ");
 		        String nbre =cl.nextLine();	
 			    int ref =  Integer.parseInt(nbre);
@@ -326,15 +326,31 @@ public class tester {
 				b=false;
 			}
 			if(b==false) break ;
+			boolean r= true ;
 			if(m.existe(gouv)) {
 				System.out.println("Choisissez La Spécialité voulue\n\t1)Geriatrie\n\t2)Urgence\n\t3)pneumologie\n\t4)Réanimation\n\t5)Pédiatrie");
-				ad=0;
-			String z = cl.nextLine();
-			int sp=Integer.parseInt(z);
-			if(z.equalsIgnoreCase("-1"))
+			 int sp =0;
+			while(r) {
+				try {
+					String z = cl.nextLine();
+					sp=Integer.parseInt(z);
+					if(sp==-1)
+					{
+						b=false; break ;
+					}
+					if(sp !=1 && sp!=2 && sp!=3 && sp!=3 && sp!=4 && sp!=5) throw new Err() ;
+					r=false ;
+				}
+			catch(Err e)
+				{
+				System.out.println("Les numéros doivent etre comprise entre 1 et 5");
+
+				}
+			catch (Exception e)
 			{
-				b=false;
-			}
+				System.out.println("Numéro invalide");
+
+			}}
 			if(b==false) break ;
 			if(sp==1)
 				m.Demande_docteur("gériatrie",gouv);
@@ -346,7 +362,7 @@ public class tester {
 				m.Demande_docteur("Pédiatrie",gouv);
 				if(sp==4)
 					m.Demande_docteur("Réanimation",gouv);
-
+				break ;
 			}
 
 
