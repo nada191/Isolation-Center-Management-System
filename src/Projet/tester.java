@@ -111,7 +111,6 @@ public class tester {
 		    if(b==false) break ;
 			}catch(Exception e) {
 			System.out.println("\nerreur de saisie, veuillez réessayer  ");
-			ad=2;
 		}
 		}
 		while(ad==3) {
@@ -130,15 +129,14 @@ public class tester {
 		    b=false ;} if (b==false) break;
 		    }catch(Exception e) {
 			System.out.println("\nerreur de saisie veuillez réessayer \n ");
-			ad=3;
 		}
 
 
 		}
 		while(ad==4) {
 		boolean b = true ;
-		System.out.print("Dans quel gouvernorat? : ");
 		System.out.println("\t -"+(tab[0])+"\t\t\t -"+(tab[1])+"\n\t -"+(tab[2])+"\t\t\t -"+(tab[3])+"\n\t -"+(tab[4])+"\t\t -"+(tab[5])+"\n\t -"+(tab[6])+"\t\t -"+(tab[7])+"\n\t -"+(tab[8])+"\t\t -"+(tab[9])+"\n");
+		System.out.print("Dans quel gouvernorat? : ");
 		String gouv =cl.nextLine();
 		if(gouv.equalsIgnoreCase("-1"))
 		{
@@ -204,11 +202,11 @@ public class tester {
 
 
 		}while(ad==8) {
+			boolean b=true; int ref=0 ; long cin=0 ;
 			try {
-				boolean b=true;
 			System.out.print("Donner son numéro de cin :");
 			String c =cl.nextLine();
-		    long cin =  Long.parseLong(c);
+		    cin =  Long.parseLong(c);
 		    if(c.equalsIgnoreCase("-1"))
 			{
 				b=false;
@@ -216,11 +214,16 @@ public class tester {
 			if(b==false) break ;
 		    System.out.print("Donner la réference du centre auquel elle appartient :");
 		    String nbre =cl.nextLine();
-		    int ref =  Integer.parseInt(nbre);
+		    ref =  Integer.parseInt(nbre);
 		    if(nbre.equalsIgnoreCase("-1"))
 			{
 				b=false;
-			}
+			}}
+			catch(Exception e) {
+				System.out.println("\nerreur de saisie veuillez réessayer \n ");
+			break;
+		}
+
 			if(b==false) break ;
 	        if(m.existe_centre_cin(ref,cin)) {
 		    m.supprimer_personne(cin, ref);
@@ -230,11 +233,7 @@ public class tester {
 	if(b==false) break ;
 	}
 
-	catch(Exception e) {
-		System.out.println("\nerreur de saisie veuillez réessayer \n ");
-	ad=8;
-}
-		}while(ad==9) {
+			while(ad==9) {
 			try {
 				boolean b=true ;
 				System.out.print("Donner son numéro de cin :"); 
@@ -245,7 +244,7 @@ public class tester {
 					b=false;
 				}
 				if(b==false) break ;
-			    System.out.println("Taper: 0 si en bon santé ou la contamination n'est pas confirmée\n 1  si situation normale (corona) \n 2 si malade (situation grave (corona))");
+			    System.out.println("Taper: 0 si en bonne santé ou la contamination n'est pas confirmée\n 1  si situation normale (corona) \n 2 si malade (situation grave (corona))");
 			    String et =cl.nextLine();
 			    int etat =  Integer.parseInt(et);
 			    if(etat!=0 && etat!=1 && etat!=2) throw new Err();
@@ -270,7 +269,7 @@ public class tester {
 		}
 		catch (Err e)
 			{
-			System.out.println("La réponse doit etre 0 , 1 ou 2"); ad=9;
+			System.out.println("La réponse doit etre 0 , 1 ou 2"); 
 			}
 		
 		catch(Exception e) {
@@ -316,7 +315,6 @@ public class tester {
 				  if(b==false) break ;
 			}catch(Exception e) {
 				System.out.println("\nerreur de saisie veuillez réessayer \n ");
-				ad=11;
 			}
 		}while(ad==12) {
 			boolean b = true ;

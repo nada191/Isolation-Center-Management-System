@@ -113,6 +113,7 @@ public class Gouvernorat {
 			}
 	    public void supprimer(long cin , int ref)
 	    {
+	    	float a=0 ; float b=0 ; float c=0 ;
 	    	for (Centre_isolement value : centres)
     		{
     			if(value.get_ref()==ref)
@@ -124,26 +125,78 @@ public class Gouvernorat {
 		    			if(value.etat(cin)!=2)
 	    				{
 	    					Scanner ab = new Scanner(System.in); 
+	    					boolean t= true ; boolean test=true ;
+	    					while(t)
+	    					{
+	    						try {
 	    					System.out.print("Note Equipe médicale : ");
-	    					int a = ab.nextInt();
+	    					String aa=ab.nextLine();
+	    					a = Float.parseFloat(aa);
 	    					if(a==-1)
-	    						break ;
-	    					System.out.print("Note nourriture");
-	    					int b = ab.nextInt();
-	    					if(b==-1)
-	    						break ;
-	    					System.out.print("Note mesure d'hygiéne");
-	    					int c = ab.nextInt();
+	    						{test = false ;break ; }
+	    					if(a>20 || a<0) throw new Err();
+	    					t=false;
+	    					}
+	    						
+	    						catch (Err e)
+	    						{
+			    					System.out.println("Les notes doivent etre comprises entre 0 et 20");
+
+	    						}
+	    						catch (Exception e) {
+		    					System.out.println("Note invalide");
+							}}
+    						if(test==false) break ;
+	    					t=true ;
+	    					while(t)
+	    					{
+	    						try {
+	    							System.out.print("Note nourriture :");
+	    	    					String bb=ab.nextLine();
+	    	    					b = Float.parseFloat(bb);
+	    	    					if(b==-1)
+		    						{test = false ;break ; }
+	    					if(b>20 || b<0) throw new Err();
+	    					
+	    					t=false;}
+	    						catch (Err e)
+	    						{
+			    					System.out.println("Les notes doivent etre comprises entre 0 et 20");
+
+	    						}
+	    						catch (Exception e) {
+		    					System.out.println("Note invalide");
+							}}
+    						if(test==false) break ;
+	    					t=true ;
+	    					while(t)
+	    					{
+	    						try {
+	    					System.out.print("Note mesure d'hygiéne :");
+	    					String cc=ab.nextLine();
+	    					c = Float.parseFloat(cc);
 	    					if(c==-1)
-	    						break ;
-							try {
-								PrintWriter ecriture = new PrintWriter (new FileWriter("evaluation.txt", true));
-								ecriture.println(ref+"\t"+a+"\t"+b+"\t"+c) ;
-								ecriture.close();
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-		    		}
+    						{test = false ;break ; }
+	    					if(c>20 || c<0) throw new Err(); t=false; }
+	    						catch (Err e)
+	    						{
+			    					System.out.println("Les notes doivent etre comprises entre 0 et 20");
+
+	    						}
+	    						catch (Exception e) {
+		    					System.out.println("Note invalide");
+							}}
+    						if(test==false) break ;
+								PrintWriter ecriture;
+								try {
+									ecriture = new PrintWriter (new FileWriter("evaluation.txt", true));
+									ecriture.println(ref+"\t"+a+"\t"+b+"\t"+c) ;
+									ecriture.close();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+								
+							} 
 						value.supprimer(value.get_p(i));
 
 	    		}}

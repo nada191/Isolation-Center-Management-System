@@ -288,7 +288,7 @@ return(trie);
 }
 	public void evaluation(int ref)
 	{
-		int s=0; int n=0 ; int m=0 ;
+		float s =0 ; float n=0 ; float m=0 ;
 		try {
 			BufferedReader lecture = new BufferedReader(new FileReader("evaluation.txt")) ;
 			String l;
@@ -299,9 +299,9 @@ return(trie);
 
 				if(Integer.parseInt(temp[0])==ref)
 				{
-					s=s+Integer.parseInt(temp[1]);
-					n=n+Integer.parseInt(temp[2]);
-					m=m+Integer.parseInt(temp[3]);
+					s=s+Float.parseFloat(temp[1]);
+					n=n+Float.parseFloat(temp[2]);
+					m=m+Float.parseFloat(temp[3]);
 					i++;
 
 				}
